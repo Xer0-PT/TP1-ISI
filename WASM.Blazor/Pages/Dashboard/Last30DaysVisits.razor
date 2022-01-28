@@ -1,0 +1,51 @@
+﻿@page "/last-30-days-visits"
+@using WASM.Blazor.Components
+@using TP1.Domain.Models
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Last 30 days visits</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else if (List.Count > 0)
+        {
+            <MudItem><MudText Typo="Typo.h6">Total Visits: @TotalVisits</MudText></MudItem>
+            <MudItem><MudText Typo="Typo.h6">Total Irregularities: @TotalIrregularities</MudText></MudItem>
+
+            <MudItem>
+                <MudChart ChartType="ChartType.Line"
+                      XAxisLabels="@XAxisLabels.ToArray()"
+                      ChartSeries="@Series"
+                      Width="100%"
+                      Height="350px"
+                      ChartOptions="@Options"
+                      
+                      />
+            </MudItem>
+            <br />
+
+            <MudItem>
+                <MudTable T="Visit" Items="@List" Hover="false" Style="width: inherit;">
+                    <HeaderContent>
+                        <MudTh>Date</MudTh>
+                        <MudTh>Irregularities</MudTh>
+                        <MudTh>Percentage</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Date">@context.DateOfVisit.ToString("dd/MM/yyyy")</MudTd>
+                        <MudTd DataLabel="Irregularities">@context.Transgressions</MudTd>
+                        <MudTd DataLabel="Irregularities">@((context.Transgressions / (double)TotalIrregularities) * 100)</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudItem>
+        }
+        else
+        {
+            <MudItem>
+                <MudAlert Severity="Severity.Warning">There are no records!</MudAlert>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>

@@ -1,0 +1,56 @@
+﻿@page "/requisitionsByTeam"
+@using WASM.Blazor.Components
+@using TP1.Domain.Models.DTO
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Search Requisitions By Team</MudText>
+    <MudText Align="Align.Center">In this page the user can search Requisitions by selecting a Team.</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else
+        {
+            if (TeamsList.Count != 0)
+            {
+                <MudItem xs="14" sm="6" md="6">
+                    <MudSelect T="int" Label="Teams" Strict="true" Variant="Variant.Outlined" FullWidth="true" @bind-Value="selectedTeamId">
+                        @foreach (var team in TeamsList)
+                        {
+                            <MudSelectItem T="int" Value="team.Id">@team.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudIconButton Icon="@Icons.Material.Filled.Search" OnClick="Search" />
+                <br />
+            }
+            if (searched)
+            {
+                if (RequisitionsList.Count == 0)
+                {
+
+                    <MudItem>
+                        <MudAlert Severity="Severity.Warning">This team has no requisitions.</MudAlert>
+                    </MudItem>
+                }
+                else
+                {
+                    <MudTable T="RequisitionDTO" Items="@RequisitionsList" @bind-SelectedItem="SelectedRequisition" Hover="true" OnRowClick="ShowRequisitionDetails" Style="width: inherit;">
+                        <HeaderContent>
+                            <MudTh>Team</MudTh>
+                            <MudTh>Processed</MudTh>
+                            <MudTh>Created Date</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Team" Style="cursor:pointer">@context.TeamName</MudTd>
+                            <MudTd DataLabel="Processed" Style="cursor:pointer">@context.Processed</MudTd>
+                            <MudTd DataLabel="Created Date" Style="cursor:pointer">@context.CreateDate.ToString("dd/MM/yyyy")</MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                }
+            }
+        }
+    </MudGrid>
+</MudContainer>

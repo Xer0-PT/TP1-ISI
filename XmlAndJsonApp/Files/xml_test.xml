@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE visits SYSTEM "xml_dtd.dtd">
+<visits>
+	<visit transgressions="6">
+		<policeId>BCL001</policeId>
+		<personId>1</personId>
+		<dateOfVisit>2009-03-13T22:16:00</dateOfVisit>
+	</visit>
+	<visit transgressions="5">
+		<policeId>BCL123</policeId>
+		<personId>2</personId>
+		<dateOfVisit>2009-03-13T22:16:00</dateOfVisit>
+	</visit>
+	<visit transgressions="1">
+		<policeId>BCL666</policeId>
+		<personId>3</personId>
+		<dateOfVisit>2009-03-13T22:16:00</dateOfVisit>
+	</visit>
+</visits>

@@ -1,0 +1,40 @@
+﻿@using TP1.Domain.Models.DTO
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">@PersonName Infection Details</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.h6">Infection was detected by @Team.Name team.</MudText>
+        <br />
+        @if (ContactsList.Count != 0)
+        {
+            <MudTable T="PersonDTO" Items="@ContactsList" Hover="true" Style="width: inherit;" Height="20rem" FixedHeader="true">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">This person was in contact with the following people:</MudText>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Name</MudTh>
+                    <MudTh>SNS Number</MudTh>
+                    <MudTh>Email</MudTh>
+                    <MudTh>Has Covid</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Name" Style="cursor:pointer">@context.Name</MudTd>
+                    <MudTd DataLabel="SNS Number" Style="cursor:pointer">@context.SnsNumber</MudTd>
+                    <MudTd DataLabel="Email" Style="cursor:pointer">@context.Email</MudTd>
+                    <MudTd DataLabel="Has Covid" Style="cursor:pointer">@context.Covid</MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+        else
+        {
+            <MudItem>
+                <MudAlert Severity="Severity.Warning">There were no contacts between this person and others!</MudAlert>
+            </MudItem>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Cancel">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

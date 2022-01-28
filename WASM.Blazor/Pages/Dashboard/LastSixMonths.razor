@@ -1,0 +1,35 @@
+﻿@page "/last-six-months"
+@using WASM.Blazor.Components
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Last six months percentage</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else
+        {
+            <MudListItem>
+                <MudText Typo="Typo.h6" Align="Align.Center">@Record.MediumNumber %</MudText>
+            </MudListItem>
+
+            <br />
+            <MudListItem>
+                <MudItem>
+                    <MudTable T="DateTime" Items="@Record.DateOfInfection" Hover="false" Style="width: inherit;">
+                        <HeaderContent>
+                            <MudTh>Date of infection</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Name">@context.Date</MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                </MudItem>
+            </MudListItem>
+            <MudListItem>
+                <MudText Align="Align.Center" Typo="Typo.h6">Total: @Record.TotalCount</MudText>
+            </MudListItem>
+        }
+    </MudGrid>
+</MudContainer>

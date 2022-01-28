@@ -1,0 +1,10 @@
+﻿using System.Text.Json;
+
+namespace WASM.Blazor.Services
+{
+    public class Config
+    {
+        public const string BaseUrl = "https://localhost:5001/api";
+        public const string OAuthToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlRkVWdxaF90NEhpQlhWZ2ZUcm5FWiJ9.eyJpc3MiOiJodHRwczovL2Rldi1mNzUyNDF0OC51cy5hdXRoMC5jb20vIiwic3ViIjoiQVRjWVlWemZDMGNmbFdJeFpLRWpncGZVTWw2aWhFZUpAY2xpZW50cyIsImF1ZCI6ImxvY2FsaG9zdCIsImlhdCI6MTYzODI4MjQ0NSwiZXhwIjoxNjQwODc0NDQ1LCJhenAiOiJBVGNZWVZ6ZkMwY2ZsV0l4WktFamdwZlVNbDZpaEVlSiIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.dbkrIlzd7lr3xPuA72ndTQ-yguZBcbQYf6Wjd18VfVwYABFdwDUwrU1_O3IijfgQLQk63n5HorDbB45PpDdYHfsf2pQ-ouQxLNB6z7WFbc0NszMjbD74QV9ioDUVTIKF2Z_PCnnWKN8ralzWiMl2wVGCBGbfZGkHa31NyLZGLfxsIvzBmrmBragSUXyWBDP7boFia1SJXp04s_nTW4Kv9M82TLB3DxL7ndewtZQx8DRPHYiLUJ4GyANvNGDc7evvJZjMr0YFRDUjGAlKqRzXqcYl6F1ZtE5PlmyJqWeaMbCVkcqMCMonUeBeONxRYSP1xeFGczTtRAD7uqNvVY7hDw";
+    }
+}

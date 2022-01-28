@@ -1,0 +1,71 @@
+﻿@using TP1.Domain.Models.DTO
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">Create Product</MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (!confirmingRequisition)
+        {
+            <MudGrid Justify="Justify.FlexEnd">
+                <MudFab Size="Size.Small" Icon="@Icons.Material.Filled.Add" Label="Add Product" OnClick="AddProduct" />
+            </MudGrid>
+            <br />
+        }
+        <MudContainer Style="max-height: 600px; min-height: 100px; overflow-y: scroll">
+            @if (!confirmingRequisition)
+            {
+                <MudGrid>
+                    <MudItem xs="14" sm="6" md="6">
+                        <MudSelect T="string" Label="Teams" Strict="true" Variant="Variant.Outlined" FullWidth="true" @bind-Value="selectedTeam">
+                            @foreach (var team in TeamsList)
+                            {
+                                <MudSelectItem T="string" Value="team.Name" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+                <br />
+                <MudGrid Justify="Justify.SpaceEvenly">
+                    @foreach (var item in ProductsToAdd)
+                    {
+                        <MudItem xs="14" sm="6" md="6">
+                            <MudSelect T="string" Label="Products" Strict="true" Variant="Variant.Outlined" @bind-Value="item.ProductName">
+                                @foreach (var product in ProductsList)
+                                {
+                                    <MudSelectItem T="string" Value="product.Name" />
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem xs="10" sm="4" md="2">
+                            <MudNumericField @bind-Value="@item.Quantity" Min="1" />
+                        </MudItem>
+                        <MudItem xs="10" sm="4" md="2">
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@(() => ProductsToAdd.Remove(item))" />
+                        </MudItem>
+                    }
+                </MudGrid>
+            }
+            else
+            {
+                <MudText Typo="Typo.h6">@selectedTeam</MudText>
+                <br />
+                <MudTable T="ProductQuantityDTO" Items="@ProductsToAdd" Style="width: inherit;" Elevation="0">
+                    <HeaderContent>
+                        <MudTh>Product</MudTh>
+                        <MudTh>Quantity</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Product" Style="cursor:pointer">@context.ProductName</MudTd>
+                        <MudTd DataLabel="Quantity" Style="cursor:pointer">@context.Quantity</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+        </MudContainer>
+        <br />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

@@ -1,0 +1,48 @@
+﻿@using TP1.Domain.Models.DTO
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public RequisitionDTO SelectedRequisition { get; set; }
+    void Cancel() => MudDialog.Cancel();
+}
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">Requisition Details</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudSimpleTable Style="width: inherit;" Elevation="0">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Processed</th>
+                    <th>Created Date</th>
+                    <th>Changed Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@SelectedRequisition.TeamName</td>
+                    <td>@SelectedRequisition.Processed</td>
+                    <td>@SelectedRequisition.CreateDate</td>
+                    <td>@SelectedRequisition.ChangeDate</td>
+                </tr>
+            </tbody>
+        </MudSimpleTable>
+        <br />
+        <MudTable T="RequisitionProductDTO" Items="@SelectedRequisition.RequisitionProducts" Style="width: inherit;" Elevation="0">
+            <HeaderContent>
+                <MudTh>Product</MudTh>
+                <MudTh>Quantity</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Product">@context.ProductName</MudTd>
+                <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Cancel">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

@@ -1,0 +1,46 @@
+﻿@page "/personsManagement"
+@using WASM.Blazor.Components
+@using TP1.Domain.Models.DTO
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Persons Management</MudText>
+    <MudText Align="Align.Center">In this page the user can make all the CRUD basic operations related to the Person entity.</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else
+        {
+            @if (PersonsList.Count != 0)
+            {
+                <MudTable T="PersonDTO" Items="@PersonsList" @bind-SelectedItem="SelectedPerson" Hover="true" OnRowClick="EditDialog" Style="width: inherit;" Height="20rem" FixedHeader="true">
+                    <ToolBarContent>
+                        <MudIconButton Icon="@Icons.Material.Filled.Refresh" OnClick="LoadPersons" />
+                        <MudSpacer />
+                        <MudFab Size="Size.Medium" Icon="@Icons.Material.Filled.Add" Label="Add new Person" OnClick="CreateDialog" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Name</MudTh>
+                        <MudTh>SNS Number</MudTh>
+                        <MudTh>Email</MudTh>
+                        <MudTh>Has Covid</MudTh>
+                        <MudTh>Active</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Name" Style="cursor:pointer">@context.Name</MudTd>
+                        <MudTd DataLabel="SNS Number" Style="cursor:pointer">@context.SnsNumber</MudTd>
+                        <MudTd DataLabel="Email" Style="cursor:pointer">@context.Email</MudTd>
+                        <MudTd DataLabel="Has Covid" Style="cursor:pointer">@context.Covid</MudTd>
+                        <MudTd DataLabel="Active" Style="cursor:pointer">@context.Active</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+            else
+            {
+                <MudFab Size="Size.Medium" Icon="@Icons.Material.Filled.Add" Label="Add new Person" OnClick="CreateDialog" />
+            }
+        }
+    </MudGrid>
+</MudContainer>

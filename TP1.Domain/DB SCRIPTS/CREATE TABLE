@@ -1,0 +1,91 @@
+create schema db;
+
+CREATE TABLE "Team" (
+   tm_id int generated always as identity,
+   tm_name varchar(50) not null,
+   tm_active boolean not null,
+   tm_createdate timestamp not null default now(),
+   tm_changedate timestamp,
+   constraint PK_tm_id primary key (tm_id)
+  );
+ 
+ CREATE TABLE "Product" (
+   pt_id int generated always as identity,
+   pt_name varchar(50) not null,
+   pt_active boolean not null,
+   pt_price float not null,
+   pt_stock int not null,
+   pt_createdate timestamp not null default now(),
+   pt_changedate timestamp,
+   constraint PK_pt_id primary key (pt_id)
+  );
+ 
+  CREATE TABLE "Requisition" (
+   rq_id int generated always as identity,
+   rq_tm_id int not null,
+   rq_processed boolean not null,
+   rq_createdate timestamp not null default now(),
+   rq_changedate timestamp,
+   constraint PK_rq_id primary key (rq_id),
+   constraint FK_tm_id foreign key (rq_tm_id) references "Team"(tm_id)
+  );
+ 
+ CREATE TABLE "RequisitionProduct" (
+   rqp_id int generated always as identity,
+   rqp_rq_id int not null,
+   rqp_pt_id int not null,
+   rqp_quantity int not null,
+   rqp_createdate timestamp not null default now(),
+   constraint PK_rqp_id primary key (rqp_id),
+   constraint FK_pt_id foreign key (rqp_pt_id) references "Product"(pt_id),
+   constraint FK_rq_id foreign key (rqp_rq_id) references "Requisition"(rq_id)
+  );
+ 
+
+
+
+create table "Person"(
+pn_id int generated always as identity,
+pn_name varchar (50) not null,
+pn_covid bool not null,
+pn_sns varchar (50) not null,
+pn_email varchar (50) not null,
+pn_active boolean not null,
+pn_createdate timestamp not null default now(),
+pn_changedate timestamp,
+constraint PK_pn_id primary key (pn_id));
+
+
+create table "PersonContact"(
+pnc_id int generated always as identity,
+pnc_infected_id int not null,
+pnc_contact_id int not null,
+pnc_date timestamp not null,
+pnc_createdate timestamp not null default now(),
+constraint PK_pnc_id primary key (pnc_id),
+constraint FK_infected_id foreign key (pnc_infected_id) references "Person"(pn_id),
+constraint FK_contact_id foreign key (pnc_contact_id) references "Person"(pn_id)
+);
+
+create table "Visit"(
+vs_id int generated always as identity,
+vs_police_id varchar(40) not null,
+vs_pn_id int not null,
+vs_dateofvisit timestamp not null,
+vs_transgressions int not null,
+vs_createdate timestamp not null default now(),
+constraint PK_vs_id primary key(vs_id),
+constraint FK_pn_id foreign key (vs_pn_id) references "Person"(pn_id)
+);
+
+create table "PersonCovid"(
+pcd_id int generated always as identity,
+pcd_tm_id int NOT null,
+pcd_pn_id int not null,
+pcd_date timestamp not NULL,
+pcd_createdate timestamp not null default now(),
+constraint PK_pcd_id primary key(pcd_id),
+constraint FK_pn_id foreign key (pcd_pn_id) references "Person"(pn_id),
+constraint FK_team_id foreign key (pcd_tm_id) references "Team"(tm_id)
+);
+

@@ -1,0 +1,45 @@
+﻿@page "/productsManagement"
+@using WASM.Blazor.Components
+@using TP1.Domain.Models.DTO
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Products Management</MudText>
+    <MudText Align="Align.Center">In this page the user can make all the CRUD basic operations related to the Product entity.</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else
+        {
+            @if (ProductsList.Count != 0)
+            {
+                <MudTable T="ProductDTO" Items="@ProductsList" @bind-SelectedItem="SelectedProduct" Hover="true" OnRowClick="EditDialog" Style="width: inherit;">
+                    <ToolBarContent>
+                        <MudSpacer />
+                        <MudFab Size="Size.Medium" Icon="@Icons.Material.Filled.Add" Label="Add new Product" OnClick="CreateDialog" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Id</MudTh>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Price</MudTh>
+                        <MudTh>Stock</MudTh>
+                        <MudTh>Active</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Id" Style="cursor:pointer">@context.Id</MudTd>
+                        <MudTd DataLabel="Name" Style="cursor:pointer">@context.Name</MudTd>
+                        <MudTd DataLabel="Price" Style="cursor:pointer">@context.Price</MudTd>
+                        <MudTd DataLabel="Stock" Style="cursor:pointer">@context.Stock</MudTd>
+                        <MudTd DataLabel="Active" Style="cursor:pointer">@context.Active</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+            else
+            {
+                <MudFab Size="Size.Medium" Icon="@Icons.Material.Filled.Add" Label="Add new Product" OnClick="CreateDialog" />
+            }
+        }
+    </MudGrid>
+</MudContainer>

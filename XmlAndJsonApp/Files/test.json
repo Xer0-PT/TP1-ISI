@@ -1,0 +1,22 @@
+
+[
+	{
+		"id": 1,
+		"personId": 2,
+		"policeId": "21321312",
+		"transgressions": 5,
+		"dateOfVisit": "2012-04-23T18:25:43.511Z"
+	
+	},
+		{
+		"id": 3,
+		"personId": 4,
+		"policeId": "2131312",
+		"transgressions": 4,
+		"dateOfVisit": "2012-04-23T18:25:43.511Z"
+	
+	}
+	
+]
+
+

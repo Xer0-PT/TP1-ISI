@@ -1,0 +1,41 @@
+﻿@page "/quanrantineManagement"
+@using WASM.Blazor.Components
+@using TP1.Domain.Models.DTO
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Quarantine Information</MudText>
+    <MudText Align="Align.Center">In this page the user can consult the people that should be in quarantine.</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else
+        {
+            @if (PersonCovidList.Count != 0)
+            {
+                <MudTable T="PersonCovidDTO" Items="@PersonCovidList" @bind-SelectedItem="SelectedPerson" Hover="true" OnRowClick="ShowDetails" Style="width: inherit;" Height="20rem" FixedHeader="true">
+                    <HeaderContent>
+                        <MudTh>Name</MudTh>
+                        <MudTh>SNS Number</MudTh>
+                        <MudTh>Infected</MudTh>
+                        <MudTh>Date of infection</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Name" Style="cursor:pointer">@PersonList.Find(x => x.Id == context.PersonId).Name</MudTd>
+                        <MudTd DataLabel="SNS Number" Style="cursor:pointer">@PersonList.Find(x => x.Id == context.PersonId).SnsNumber</MudTd>
+                        <MudTd DataLabel="Infected" Style="cursor:pointer">@PersonList.Find(x => x.Id == context.PersonId).Covid</MudTd>
+                        <MudTd DataLabel="Date of infection" Style="cursor:pointer">@context.DateOfInfection</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+            else
+            {
+                <MudItem>
+                    <MudAlert Severity="Severity.Warning">There are no results!</MudAlert>
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</MudContainer>

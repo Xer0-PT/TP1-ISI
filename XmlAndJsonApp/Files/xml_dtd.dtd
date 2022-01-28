@@ -1,0 +1,10 @@
+
+  <!--elements-->
+  <!ELEMENT visits (visit+)>
+  <!ELEMENT visit (policeId, personId, dateOfVisit)>
+  <!ELEMENT policeId (#PCDATA)>
+  <!ELEMENT personId (#PCDATA)>
+  <!ELEMENT dateOfVisit (#PCDATA)>
+
+ <!--attributes-->
+ <!ATTLIST visit transgressions CDATA #REQUIRED>

@@ -1,0 +1,54 @@
+﻿@page "/most-expensive-teams"
+@using WASM.Blazor.Components
+@using TP1.Domain.Models.DTO
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">10 Most Expensive Teams</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else if (List.Length != 0)
+        {
+            <MudItem>
+                @if (Index > -1)
+                {
+                    <MudText Typo="Typo.h6">@Labels[Index]: @Data[Index] €</MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">Click on the chart to show its individual values.</MudText>
+                }
+            </MudItem>
+            <br />
+            <MudItem>
+                <MudChart ChartType="ChartType.Pie"
+                      InputData="@Data"
+                      InputLabels="@Labels"
+                      @bind-SelectedIndex="Index"
+                      Width="300px"
+                      Height="300px" />
+            </MudItem>
+            <br />
+            <MudItem>
+                <MudTable T="ExpensiveTeamDTO" Items="@List" Hover="false" Style="width: inherit;">
+                    <HeaderContent>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Total</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Name">@context.TeamName </MudTd>
+                        <MudTd DataLabel="Total">@context.TotalPrice</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudItem>
+        }
+        else
+        {
+            <MudItem>
+                <MudAlert Severity="Severity.Warning">There are no records!</MudAlert>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>

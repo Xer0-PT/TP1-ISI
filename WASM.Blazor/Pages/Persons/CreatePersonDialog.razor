@@ -1,0 +1,69 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">Create Person</MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (!ShowAllPersons)
+        {
+            <MudItem xs="12" sm="6" md="12">
+                <MudTextField @bind-Value="Name"
+                          Label="Name"
+                          Variant="Variant.Outlined"
+                          FullWidth="true" />
+            </MudItem>
+            <br />
+            <MudItem xs="12" sm="6" md="12">
+                <MudTextField @bind-Value="Email"
+                          Label="Email"
+                          Variant="Variant.Outlined"
+                          FullWidth="true" />
+            </MudItem>
+            <br />
+            <MudItem xs="12" sm="6" md="12">
+                <MudTextField @bind-Value="SNSNumber"
+                          Label="SNS"
+                          Variant="Variant.Outlined"
+                          FullWidth="true" />
+            </MudItem>
+            <br />
+            <MudItem xs="12" sm="6" md="12">
+                <MudSwitch @bind-Checked="IsInfected" Label="Infected" />
+            </MudItem>
+        }
+        else
+        {
+            <MudText>Select the team that has detected this case of infection.</MudText>
+            <MudItem xs="14" sm="6" md="6">
+                <MudSelect T="int" Label="Teams" Strict="true" Variant="Variant.Outlined" FullWidth="true" @bind-Value="SelectedTeamId">
+                    @foreach (var team in TeamsList)
+                    {
+                        <MudSelectItem T="int" Value="team.Id">@team.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <br />
+            if (PersonsList.Count != 0)
+            {
+                <MudTable Items="@PersonsList" MultiSelection="true" @bind-SelectedItems="PersonContactList" Hover="true" Dense="true" Height="12rem" Elevation="0" FixedHeader="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">Choose the people this person was in contact with:</MudText>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Name</MudTh>
+                        <MudTh>SNS Number</MudTh>
+                        <MudTh>Email</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Name" Style="cursor:pointer">@context.Name</MudTd>
+                        <MudTd DataLabel="SNS Number" Style="cursor:pointer">@context.SnsNumber</MudTd>
+                        <MudTd DataLabel="Email" Style="cursor:pointer">@context.Email</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Add">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

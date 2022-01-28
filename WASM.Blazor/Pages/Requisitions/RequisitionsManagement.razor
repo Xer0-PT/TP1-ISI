@@ -1,0 +1,42 @@
+﻿@page "/requisitionsManagement"
+@using WASM.Blazor.Components
+@using TP1.Domain.Models.DTO
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Requisitions Management</MudText>
+    <MudText Align="Align.Center">In this page the user can make all the CRUD basic operations related to the Requisition entity.</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else
+        {
+            @if (RequisitionsList.Count != 0)
+            {
+                <MudTable T="RequisitionDTO" Items="@RequisitionsList" @bind-SelectedItem="SelectedRequisition" Hover="true" OnRowClick="ShowRequisitionDetails" Style="width: inherit;">
+                    <ToolBarContent>
+                        <MudIconButton Icon="@Icons.Material.Filled.Refresh" OnClick="UpdateList" />
+                        <MudSpacer />
+                        <MudFab Size="Size.Medium" Icon="@Icons.Material.Filled.Add" Label="Add new Requisition" OnClick="CreateDialog" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Team</MudTh>
+                        <MudTh>Processed</MudTh>
+                        <MudTh>Created Date</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Team" Style="cursor:pointer">@context.TeamName</MudTd>
+                        <MudTd DataLabel="Processed" Style="cursor:pointer">@context.Processed</MudTd>
+                        <MudTd DataLabel="Created Date" Style="cursor:pointer">@context.CreateDate.ToString("dd/MM/yyyy")</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+            else
+            {
+                <MudFab Size="Size.Medium" Icon="@Icons.Material.Filled.Add" Label="Add new Requisition" OnClick="CreateDialog" />
+            }
+        }
+    </MudGrid>
+</MudContainer>

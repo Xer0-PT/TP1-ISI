@@ -1,0 +1,46 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">Edit Product</MudText>
+        <MudSpacer />
+        <MudButton Color="@MudBlazor.Color.Error"
+                   Variant="Variant.Filled"
+                   OnClick="Delete"
+                   StartIcon="@Icons.Material.Filled.DeleteForever"
+                   Size="MudBlazor.Size.Small">Delete</MudButton>
+    </TitleContent>
+    <DialogContent>
+        <MudItem xs="12" sm="6" md="12">
+            <MudTextField @bind-Value="Name"
+                          Label="Name"
+                          Variant="Variant.Outlined"
+                          FullWidth="true" />
+        </MudItem>
+        <br />
+        <MudItem xs="12" sm="6" md="12">
+            <MudNumericField @bind-Value="Price"
+                             Label="Price"
+                             Variant="Variant.Outlined"
+                             FullWidth="true"
+                             Adornment="Adornment.End"
+                             AdornmentIcon="@Icons.Material.Filled.EuroSymbol"
+                             Min="0"
+                             Format="F1" />
+        </MudItem>
+        <br />
+        <MudItem xs="12" sm="6" md="12">
+            <MudNumericField @bind-Value="Stock"
+                             Label="Stock"
+                             Variant="Variant.Outlined"
+                             FullWidth="true"
+                             Min="0" />
+        </MudItem>
+        <br />
+        <MudItem xs="12" sm="6" md="12">
+            <MudSwitch @bind-Checked="IsActive">Active</MudSwitch>
+        </MudItem>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

@@ -1,0 +1,55 @@
+﻿@page "/top-5-products"
+@using WASM.Blazor.Components
+@using TP1.Domain.Models.DTO
+
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Top 5 sold products</MudText>
+    <MudGrid Class="mt-8" Justify="Justify.Center">
+        @if (IsLoading)
+        {
+            <Loading isVisible="IsLoading" />
+        }
+        else if (List.Length != 0)
+        {
+            <MudItem>
+                @if (Index > -1)
+                {
+                    <MudText Typo="Typo.h6">@Labels[Index]: @Data[Index] units</MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">Click on the chart to show its individual values.</MudText>
+                }
+            </MudItem>
+            <br />
+            <MudItem>
+                <MudChart ChartType="ChartType.Pie"
+                          InputData="@Data"
+                          InputLabels="@Labels"
+                          @bind-SelectedIndex="Index"
+                          Width="300px"
+                          Height="300px" />
+            </MudItem>
+            <br />
+            
+            <MudItem>
+                <MudTable T="TopProductDTO" Items="@List" Hover="false" Style="width: inherit;">
+                    <HeaderContent>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Quantity</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Name">@context.ProductName </MudTd>
+                        <MudTd DataLabel="Value">@context.Count</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudItem>            
+        }
+        else
+        {
+            <MudItem>
+                <MudAlert Severity="Severity.Warning">There are no records!</MudAlert>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>

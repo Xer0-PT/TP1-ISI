@@ -1,0 +1,118 @@
+insert into "Team"(tm_name, tm_active, tm_createdate, tm_changedate)
+values
+('SNSNorte', true, now(), now()),
+('SNSSul', false, now(), now()),
+('SNSCentro', true, now(), now()),
+('INEM', false, now(), now()),
+('Bombeiros', true, now(), now()),
+('Equipa Médica do Porto', false, now(), now()),
+('Equipa Médica de Barcelos', true, now(), now()),
+('Equipa Médica de Braga', false, now(), now()),
+('Equipa Médica de Lisboa', true, now(), now()),
+('Equipa Médica de Coimbra', false, now(), now());
+
+
+insert into "Person"(pn_name, pn_sns, pn_email, pn_active, pn_createdate, pn_changedate, pn_covid)
+values
+('João Veloso', '195838746', 'jngveloso@gmail.com', true, now(), now(), false),
+('Joel Martins', '239482736', 'joelmartins@gmail.com', true, now(), now(), false),
+('Emanuel Carvalho', '093827348', 'emanuelcarvalho@gmail.com', true, now(), now(), true),
+('Ricardo Fonseca', '837463295', 'rfonseca@gmail.com', true, now(), now(), false),
+('Leandro Albuquerque', '8364756274', 'leandroalbu@gmail.com', true, now(), now(), false),
+('José Ferreira', '746421854', 'jferreira@gmail.com', true, now(), now(), true),
+('Mário Resende', '236432385', 'marioresende@gmail.com', true, now(), now(), false),
+('Cátia Marques', '756432930', 'cmarques@gmail.com', true, now(), now(), false),
+('Rita Andrade', '975643284', 'randrade@gmail.com', true, now(), now(), true),
+('Mónica Peixoto', '654323746', 'mpeixoto@gmail.com', true, now(), now(), false);
+
+insert into "Product"(pt_name, pt_price, pt_stock, pt_active, pt_createdate, pt_changedate)
+values
+('Máscaras Cirúrgicas', 10, 80000, true, now(), now()),
+('Luvas descartáveis', 2, 900000, true, now(), now()),
+('Seringas', 5, 4000, true, now(), now()),
+('Batas descartáveis', 5, 80000, true, now(), now()),
+('Soro Fisiológico', 2, 99900, true, now(), now()),
+('Anestesias', 20, 9000, true, now(), now()),
+('Toucas cirúrgicas', 1, 80000, true, now(), now()),
+('Paracetamol', 2, 90000, true, now(), now()),
+('Bolsas de Recolha de Fluídos', 5, 9000, true, now(), now()),
+('Campos cirúrgicos', 2, 1000, true, now(), now());
+
+insert into "Visit"(vs_police_id, vs_pn_id, vs_dateofvisit, vs_transgressions , vs_createdate)
+values
+('321312123', 1, TIMESTAMP '2021-11-16 18:35:03', 0, now()),
+('321354543', 2, TIMESTAMP '2021-11-16 19:40:25', 15, now()),
+('947438292', 3, TIMESTAMP '2021-11-17 08:10:34', 11, now()),
+('847463526', 4, TIMESTAMP '2021-11-19 09:20:59', 12, now()),
+('384654390', 5, TIMESTAMP '2021-11-20 10:25:21', 9, now()),
+('948374564', 6, TIMESTAMP '2021-11-21 11:30:14', 7, now()),
+('323645328', 7, TIMESTAMP '2021-11-22 12:34:03', 1, now()),
+('213049586', 8, TIMESTAMP '2021-11-23 13:36:07', 3, now()),
+('847574326', 9, TIMESTAMP '2021-11-24 14:30:09', 6, now()),
+('947438292', 10, TIMESTAMP '2021-11-18 15:36:18', 0, now()),
+('384654390', 11, TIMESTAMP '2021-11-22 15:36:18', 2, now()),
+('213049586', 12, TIMESTAMP '2021-11-11 15:36:18', 6, now()),
+('984732123', 13, TIMESTAMP '2021-11-07 15:36:18', 0, now()),
+('321312123', 14, TIMESTAMP '2021-11-09 15:36:18', 10, now()),
+('947438292', 15, TIMESTAMP '2021-11-18 15:36:18', 1, now()),
+('984732123', 16, TIMESTAMP '2021-11-14 15:36:18', 8, now()),
+('948374564', 17, TIMESTAMP '2021-11-25 15:36:18', 8, now()),
+('984732123', 18, TIMESTAMP '2021-11-07 15:36:18', 0, now()),
+('321312123', 19, TIMESTAMP '2021-11-09 15:36:18', 10, now()),
+('947438292', 20, TIMESTAMP '2021-11-18 15:36:18', 1, now()),
+('984732123', 21, TIMESTAMP '2021-11-14 15:36:18', 8, now());
+
+
+insert into "Requisition"(rq_tm_id, rq_processed , rq_createdate, rq_changedate)
+values
+(1, true, now(), now()),
+(2, true, now(), now()),
+(3, true, now(), now()),
+(4, false, now(), now()),
+(5, true, now(), now()),
+(6, false, now(), now()),
+(7, true, now(), now()),
+(8, false, now(), now()),
+(9, true, now(), now()),
+(10, false, now(), now());
+
+insert into "RequisitionProduct" (rqp_rq_id, rqp_pt_id , rqp_quantity , rqp_createdate)
+values
+(1, 10, 200, now()),
+(2, 9, 300, now()),
+(3, 8, 100, now()),
+(4, 7, 48, now()),
+(5, 6, 207, now()),
+(6, 5, 108, now()),
+(7, 4, 10, now()),
+(8, 3, 2000, now()),
+(9, 2, 30, now()),
+(10, 1, 10, now());
+
+
+insert into "PersonContact" (pnc_infected_id, pnc_contact_id, pnc_date, pnc_createdate)
+values
+(3, 10, TIMESTAMP '2021-04-10 18:25:00', now()),
+(3, 9, TIMESTAMP '2021-04-11 17:45:00', now()),
+(3, 8, TIMESTAMP '2021-04-12 16:15:00', now()),
+(6, 7, TIMESTAMP '2021-01-16 15:15:00', now()),
+(6, 6, TIMESTAMP '2021-01-17 14:25:00', now()),
+(6, 5, TIMESTAMP '2021-01-18 13:55:00', now()),
+(9, 4, TIMESTAMP '2021-09-01 13:45:00', now()),
+(9, 3, TIMESTAMP '2021-09-02 10:35:00', now()),
+(9, 2, TIMESTAMP '2021-09-02 19:25:00', now()),
+(9, 1, TIMESTAMP '2021-09-03 20:15:00', now());
+
+
+insert into "PersonCovid" (pcd_tm_id, pcd_pn_id, pcd_date, pcd_createdate)
+values
+(1, 3, TIMESTAMP '2021-04-10 18:25:00', now()),
+(2, 6, TIMESTAMP '2021-01-16 15:15:00', now()),
+(3, 9, TIMESTAMP '2021-08-30 13:45:00', now());
+
+
+
+
+
+
+
